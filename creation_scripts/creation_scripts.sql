@@ -1,7 +1,3 @@
-CREATE DATABASE IF NOT EXISTS RecipeManagement;
-USE RecipeManagement;
-
-
 CREATE TABLE IF NOT EXISTS Recipes (
     RecipeId INT AUTO_INCREMENT PRIMARY KEY,
     Name VARCHAR(255) NOT NULL,
@@ -29,24 +25,25 @@ CREATE TABLE IF NOT EXISTS Instructions (
     Description TEXT NOT NULL,
     ImageURL VARCHAR(255),
     RecipeId INT,
-    FOREIGN KEY (RecipeId) REFERENCES Recipes(RecipeId)
+    CONSTRAINT fk_instructions_recipes FOREIGN KEY (RecipeId) REFERENCES Recipes(RecipeId) ON DELETE CASCADE
 );
 
--- Junction tables --
+-- junction tables to include ON DELETE CASCADE for simpler deletion process
 
 CREATE TABLE IF NOT EXISTS RecipeIngredients (
     RecipeId INT,
     IngredientId INT,
     Amount VARCHAR(255),
     PRIMARY KEY (RecipeId, IngredientId),
-    FOREIGN KEY (RecipeId) REFERENCES Recipes(RecipeId),
-    FOREIGN KEY (IngredientId) REFERENCES Ingredients(IngredientId)
+    CONSTRAINT fk_recipeingredients_recipes FOREIGN KEY (RecipeId) REFERENCES Recipes(RecipeId) ON DELETE CASCADE,
+    CONSTRAINT fk_recipeingredients_ingredients FOREIGN KEY (IngredientId) REFERENCES Ingredients(IngredientId) ON DELETE CASCADE
 );
+
 
 CREATE TABLE IF NOT EXISTS RecipeHardware (
     RecipeId INT,
     HardwareId INT,
     PRIMARY KEY (RecipeId, HardwareId),
-    FOREIGN KEY (RecipeId) REFERENCES Recipes(RecipeId),
-    FOREIGN KEY (HardwareId) REFERENCES CookingHardware(HardwareId)
+    CONSTRAINT fk_recipehardware_recipes FOREIGN KEY (RecipeId) REFERENCES Recipes(RecipeId) ON DELETE CASCADE,
+    CONSTRAINT fk_recipehardware_hardware FOREIGN KEY (HardwareId) REFERENCES CookingHardware(HardwareId) ON DELETE CASCADE
 );

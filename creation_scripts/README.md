@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS Instructions (
     Description TEXT NOT NULL,
     ImageURL VARCHAR(255),
     RecipeId INT,
-    FOREIGN KEY (RecipeId) REFERENCES Recipes(RecipeId)
+    CONSTRAINT fk_instructions_recipes FOREIGN KEY (RecipeId) REFERENCES Recipes(RecipeId) ON DELETE CASCADE
 );
 ```
 
@@ -69,8 +69,8 @@ CREATE TABLE IF NOT EXISTS RecipeIngredients (
     IngredientId INT,
     Amount VARCHAR(255),
     PRIMARY KEY (RecipeId, IngredientId),
-    FOREIGN KEY (RecipeId) REFERENCES Recipes(RecipeId),
-    FOREIGN KEY (IngredientId) REFERENCES Ingredients(IngredientId)
+    CONSTRAINT fk_recipeingredients_recipes FOREIGN KEY (RecipeId) REFERENCES Recipes(RecipeId) ON DELETE CASCADE,
+    CONSTRAINT fk_recipeingredients_ingredients FOREIGN KEY (IngredientId) REFERENCES Ingredients(IngredientId) ON DELETE CASCADE
 );
 ```
 
@@ -81,8 +81,8 @@ CREATE TABLE IF NOT EXISTS RecipeHardware (
     RecipeId INT,
     HardwareId INT,
     PRIMARY KEY (RecipeId, HardwareId),
-    FOREIGN KEY (RecipeId) REFERENCES Recipes(RecipeId),
-    FOREIGN KEY (HardwareId) REFERENCES CookingHardware(HardwareId)
+    CONSTRAINT fk_recipehardware_recipes FOREIGN KEY (RecipeId) REFERENCES Recipes(RecipeId) ON DELETE CASCADE,
+    CONSTRAINT fk_recipehardware_hardware FOREIGN KEY (HardwareId) REFERENCES CookingHardware(HardwareId) ON DELETE CASCADE
 );
 ```
 
@@ -98,4 +98,8 @@ By executing these scripts, you'll have set up the database structure needed for
 
 ---
 
-Entire creation script might be found in [creation_script.sql](creation_script.sql)
+creation of the database can be found in [creation_database.sql](creation_database.sql)
+
+---
+
+Entire creation script might be found in [creation_scripts.sql](creation_scripts.sql)
