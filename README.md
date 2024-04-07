@@ -10,15 +10,15 @@ The project is organized into specific directories to streamline development and
 ```
 .
 ├── creation_scripts
-│   ├── [creation_database.sql](creation_scripts/creation_database.sql)
-│   ├── [creation_scripts.sql](creation_scripts/creation_scripts.sql)
-│   └── [README.md](creation_scripts/README.md)
+│   ├── creation_database.sql       --creation of the database
+│   ├── creation_scripts.sql        --creation of tables
+│   └── README.md
 ├── insertion_scripts
-│   ├── [development_scripts.sql](insertion_scripts/development_scripts.sql)
-│   ├── [insertion_scripts.sql](insertion_scripts/insertion_scripts.sql)
-│   └── [README.md](insertion_scripts/README.md)
-├── [README.md](README.md)
-└── [recipes_entity_table.png](recipes_entity_table.png)
+│   ├── development_scripts.sql     --fetching, updating, deleting, finding data
+│   ├── insertion_scripts.sql       --insertion sample data in the tables
+│   └── README.md
+├── README.md                       --main report
+└── recipes_entity_table.png        --diagram of the database structure
 ```
 
 Each directory contains SQL scripts and README files that detail the purposes and functionalities of the scripts within, ensuring clarity and ease of use.
